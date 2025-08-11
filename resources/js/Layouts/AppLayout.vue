@@ -53,10 +53,21 @@ const logout = () => {
                                 </NavLink>
                             </div>
 
-
                              <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Cálulo da aposentadoria
+                                <NavLink :href="route('calculateamount')" :active="route().current('calculateamount')">
+                                    Cálulo do montante
+                                </NavLink>
+                            </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('simulatecenario')" :active="route().current('simulatecenario')">
+                                    Simular Cenário
+                                </NavLink>
+                            </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('financechat')" :active="route().current('financechat')">
+                                    Chat IA
                                 </NavLink>
                             </div>
                         </div>

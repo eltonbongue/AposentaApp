@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    // 🔹 Configuração do OpenAI
+    'openai' => [
+        'api_key' => env('OPENAI_API_KEY'),
+    ],
+
 ];

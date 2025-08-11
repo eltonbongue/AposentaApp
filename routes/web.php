@@ -21,4 +21,18 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+   Route::get('/calculateamount', function () {
+        return Inertia::render('CalculateAmount');
+    })->name('calculateamount');
+
+    Route::get('/simulatecenario', function () {
+        return Inertia::render('SimulateScenario');
+    })->name('simulatecenario');
+
+       Route::get('/financechat', function () {
+        return Inertia::render('FinanceChat');
+    })->name('financechat');
+
+    
 });
