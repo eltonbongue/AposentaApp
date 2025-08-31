@@ -20,7 +20,10 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
           <p class="text-sm text-gray-500">Notificações</p>
           <h2 class="text-3xl font-bold">87</h2>
         </div>
-    
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow text-center">
+          <p class="text-sm text-gray-500">Tarefas Pendentes</p>
+          <h2 class="text-3xl font-bold">14</h2>
+        </div>
       </div>
     </div>
   </AdminLayout>

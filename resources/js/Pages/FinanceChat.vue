@@ -37,7 +37,7 @@ const limparMensagens = () => {
 
 <template>
   <AppLayout title="Assistente de Finanças">
-    <template #header>
+    <template #header >
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Assistente de Finanças com IA
       </h2>

@@ -16,6 +16,10 @@ class FinancialProfile extends Model
         'investimentos',
         'montante_aposentadoria',
         'idade_aposentadoria',
+        'idade_actual',
+        'duracao_aposentadoria',
+        'retorno_investimento_anual',
+        'inflacao_anual',
     ];
 
     public function user()
