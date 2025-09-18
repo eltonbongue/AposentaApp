@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+import { usePage } from '@inertiajs/vue3'
+const page = usePage()
+const unreadCount = page.props.unreadCount
 import { Head, Link, router } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
@@ -7,6 +10,11 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = 'http://localhost:8000' // ou o domínio/porta do seu backend
+
 
 defineProps({
     title: String,
@@ -34,27 +42,27 @@ const logout = () => {
         <Banner />
 
         <div class="min-h-screen bg-white">
-            <nav class="bg-white border-b border-gray-100">
+            <nav class="bg-gray-900 border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('dashboard')" class="text-white font-bold text-lg">
                                     <ApplicationMark class="block h-9 w-auto" />
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="text-white font-bold text-lg">
                                     Dashboard
                                 </NavLink>
                             </div>
 
                              <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('calculateamount')" :active="route().current('calculateamount')">
+                                <NavLink :href="route('calculateamount')" :active="route().current('calculateamount')" class="text-white font-bold text-lg">
                                     Simular Cenário
                                 </NavLink>
                             </div>
@@ -62,18 +70,30 @@ const logout = () => {
                             
 
                             <div class=" hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('financechat')" :active="route().current('financechat')">
+                                <NavLink :href="route('financechat')" :active="route().current('financechat')" class="text-white font-bold text-lg">
                                     Chat IA
                                 </NavLink>
                             </div>
 
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('notificacoes')" :active="route().current('notificacoes')">
-                                    Notificações
-                                </NavLink>
-                            </div>
+                          <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                          
+  <NavLink
+    :href="route('notificacoes')"
+    :active="route().current('notificacoes')"
+    class="text-white font-bold text-lg relative"
+  >
+    Notificações
+    <!-- Badge de notificações não lidas -->
+<span
+  v-if="unreadCount > 0"
+  class="absolute top-0 -right-2 bg-red-500 text-white text-xs font-bold px-1 py-0.5 rounded-full"
+>
+  {{ unreadCount }}
+</span>
 
-                            
+  </NavLink>
+</div>
+                         
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -157,11 +177,11 @@ const logout = () => {
                                     <template #content>
                                         <!-- Account Management -->
                                         <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Account
+                                            Gerenciar Conta
                                         </div>
 
                                         <DropdownLink :href="route('profile.show')">
-                                            Profile
+                                            Perfil
                                         </DropdownLink>
 
                                         <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
@@ -173,7 +193,7 @@ const logout = () => {
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
                                             <DropdownLink as="button">
-                                                Log Out
+                                                Sair
                                             </DropdownLink>
                                         </form>
                                     </template>
@@ -210,13 +230,57 @@ const logout = () => {
                     </div>
                 </div>
 
-                <!-- Responsive Navigation Menu -->
-                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
-                    <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
+              <!-- Responsive Navigation Menu -->
+<div :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }" class="sm:hidden">
+
+    <!-- Menu Links -->
+    <div class="pt-2 pb-3 space-y-1">
+
+        <!-- Dashboard -->
+        <ResponsiveNavLink
+            :href="route('dashboard')"
+            :active="route().current('dashboard')"
+        >
+            Dashboard
+        </ResponsiveNavLink>
+
+        <!-- Simular Cenário -->
+        <ResponsiveNavLink
+            :href="route('calculateamount')"
+            :active="route().current('calculateamount')"
+        >
+            Simular Cenário
+        </ResponsiveNavLink>
+
+        <!-- Chat IA -->
+        <ResponsiveNavLink
+            :href="route('financechat')"
+            :active="route().current('financechat')"
+        >
+            Chat IA
+        </ResponsiveNavLink>
+
+        <!-- Notificações -->
+        <ResponsiveNavLink
+            :href="route('notificacoes')"
+            :active="route().current('notificacoes')"
+            class="relative"
+        >
+            Notificações
+
+            <!-- Badge de notificações não lidas -->
+            <span
+                v-if="unreadCount > 0"
+                class="absolute top-0 -right-2 bg-red-500 text-white text-xs font-bold px-1 py-0.5 rounded-full"
+            >
+                {{ unreadCount }}
+            </span>
+        </ResponsiveNavLink>
+
+    </div>
+
+
+
 
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
@@ -237,7 +301,7 @@ const logout = () => {
 
                         <div class="mt-3 space-y-1">
                             <ResponsiveNavLink :href="route('profile.show')" :active="route().current('profile.show')">
-                                Profile
+                                Perfil
                             </ResponsiveNavLink>
 
                             <ResponsiveNavLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')" :active="route().current('api-tokens.index')">
@@ -247,7 +311,7 @@ const logout = () => {
                             <!-- Authentication -->
                             <form method="POST" @submit.prevent="logout">
                                 <ResponsiveNavLink as="button">
-                                    Log Out
+                                    Sair
                                 </ResponsiveNavLink>
                             </form>
 
@@ -309,3 +373,4 @@ const logout = () => {
         </div>
     </div>
 </template>
+

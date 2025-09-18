@@ -44,10 +44,11 @@ public function financialProfile()
 }
 
 
-    // Relação com o seu próprio model de notificações personalizadas
+// Relação com as notificações personalizadas
 public function customNotifications()
 {
     return $this->hasMany(\App\Models\CustomNotification::class, 'user_id');
 }
+
 
 }

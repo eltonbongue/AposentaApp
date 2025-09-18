@@ -9,7 +9,7 @@
       <Header @toggleSidebar="toggleSidebar" />
 
       <!-- Page Content -->
-      <main class="p-6 overflow-y-auto">
+      <main class="flex-1 p-6 overflow-y-auto">
         <slot />
       </main>
     </div>
@@ -17,12 +17,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import Sidebar from '@/Components/Sidebar.vue';
-import Header from '@/Components/Header.vue';
+import { ref } from 'vue'
+import Sidebar from '@/Components/Sidebar.vue'
+import Header from '@/Components/Header.vue'
 
-const sidebarOpen = ref(true);
+const sidebarOpen = ref(true)
+
 const toggleSidebar = () => {
-  sidebarOpen.value = !sidebarOpen.value;
-};
+  sidebarOpen.value = !sidebarOpen.value
+}
 </script>

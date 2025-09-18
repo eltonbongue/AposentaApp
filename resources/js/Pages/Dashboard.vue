@@ -3,8 +3,8 @@
     <div class="p-4 md:p-6 bg-gray-100 min-h-screen space-y-10">
 
       <!-- Cabeçalho -->
-      <header class="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-4 md:p-6 rounded shadow max-w-6xl mx-auto gap-4">
-        <h1 class="text-2xl md:text-3xl font-bold text-indigo-700">Dashboard Financeira</h1>
+      <header class="flex flex-col md:flex-row justify-between items-start md:items-center bg-gray-800 p-4 md:p-6 rounded shadow max-w-6xl mx-auto gap-4">
+        <h1 class="text-2xl md:text-2xl font-bold text-white">Dashboard Financeira</h1>
         <button @click="openModal" class="btn flex items-center gap-2 w-full md:w-auto">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -14,8 +14,8 @@
       </header>
 
       <!-- Metas -->
-      <section class="p-4 md:p-6 bg-white rounded shadow max-w-6xl mx-auto">
-        <h2 class="text-xl font-semibold mb-4 text-gray-700">Metas Financeiras</h2>
+      <section class="p-4 md:p-6 bg-gray-800 rounded shadow max-w-6xl mx-auto">
+        <h2 class="text-xl font-semibold mb-4 text-white">Metas Financeiras</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div class="bg-indigo-100 p-4 rounded">
             <p class="text-sm text-gray-600">Meta Anual</p>
@@ -75,6 +75,7 @@ import { ref, onMounted } from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import Modal from '@/Components/Modal.vue'
 import axios from 'axios'
+
 
 const showModal = ref(false)
 const loading = ref(false)

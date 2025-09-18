@@ -12,7 +12,7 @@ import { Link } from '@inertiajs/vue3'
 
       <div class="space-x-4">
         <Link
-          href="#sobre"
+          :href="route('know-more')"
           class="text-white hover:text-yellow-300 font-semibold transition"
         >
           Saber Mais
@@ -46,13 +46,13 @@ import { Link } from '@inertiajs/vue3'
       </h2>
 
       <p class="mt-6 text-indigo-200 max-w-xl text-lg sm:text-xl drop-shadow-md">
-        O Aposent+ ajuda você a projetar seu futuro financeiro, recomendando a
+        O Aposenta+ ajuda você a projetar seu futuro financeiro, recomendando a
         melhor poupança mensal para a aposentadoria dos seus sonhos.
       </p>
 
       <div class="mt-10 flex flex-wrap justify-center gap-4">
         <Link
-          href="#sobre"
+          :href="route('know-more')"
           class="bg-yellow-300 text-indigo-900 font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-yellow-400 transition transform hover:-translate-y-1"
         >
           Saiba Mais

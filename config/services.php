@@ -35,9 +35,10 @@ return [
         ],
     ],
 
-    // 🔹 Configuração do OpenAI
-    'openai' => [
-        'api_key' => env('OPENAI_API_KEY'),
-    ],
+    //  Configuração do GROQ
+  'groq' => [
+    'api_key' => env('GROQ_API_KEY'),
+],
+
 
 ];

@@ -39,7 +39,7 @@ const submit = () => {
           <AuthenticationCardLogo class="h-10 w-auto" />
         </div>
 
-        <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">Welcome Back</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">Seja bem vindo</h2>
         <p class="text-gray-500 text-sm mb-6 text-center">Insira suas credenciais para acessar sua conta</p>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600 text-center">

@@ -2,47 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\CustomNotification;
+use App\Models\ChatQuestion;
+use Inertia\Inertia;
 
-class adminController extends Controller
+class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
-    }
+        // Contadores simples
+        $usersCount = User::count();
+        $notificationsCount = CustomNotification::count();
+        $chatQuestionsCount = ChatQuestion::count(); // total de perguntas no chatbot
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // Usuários criados por mês
+        $usersPerMonth = User::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+            ->groupBy('month')
+            ->pluck('total', 'month');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // Notificações por mês
+        $notificationsPerMonth = CustomNotification::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+            ->groupBy('month')
+            ->pluck('total', 'month');
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        // Perguntas do chatbot por categoria
+        $chatQuestionsByCategory = ChatQuestion::selectRaw('category, COUNT(*) as total')
+            ->groupBy('category')
+            ->pluck('total', 'category')
+            ->toArray();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return Inertia::render('admin/DashboardAdmin', [
+            'stats' => [
+                'users' => $usersCount,
+                'notifications' => $notificationsCount,
+                'chatQuestions' => $chatQuestionsCount, // total dinâmico
+            ],
+            'charts' => [
+                'usersPerMonth' => $usersPerMonth,
+                'notificationsPerMonth' => $notificationsPerMonth,
+                'chatQuestionsByType' => $chatQuestionsByCategory, // gráfico dinâmico
+            ],
+        ]);
     }
 }
